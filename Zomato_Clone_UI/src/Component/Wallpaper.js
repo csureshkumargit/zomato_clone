@@ -1,6 +1,6 @@
 import react, { useEffect } from "react";
 import React, { Component } from "react";
-import { withRouter } from "react-router";
+import WithRouter from "./WithRouter";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import GetRestaurantsByLocationsAction from "../store/actions/GetRestaurantsByLocationsAction";
@@ -16,7 +16,8 @@ const Wallpaper = (props) => {
 
     }
     const NavigateToRestaurantdetail = (restaurant) => {
-        props.history.push(`/details?id=${restaurant._id}`);
+        props.router.navigate(`/details?id=${restaurant._id}`);
+
     }
     const handleSearch = (event) => {
         props.getSuggestedRestaurants(event.target.value, restaurant_list_location)
@@ -96,4 +97,4 @@ const mapStateToProps = (state) => {
         locationsData: state.locations.locations
     }
 }
-export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(Wallpaper);
+export default compose(WithRouter, connect(mapStateToProps, mapDispatchToProps))(Wallpaper);
